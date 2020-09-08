@@ -10,14 +10,15 @@ import android.support.v7.app.AppCompatActivity;
 //or bitmap
 public class P2CanvasDrawing extends AppCompatActivity {
 P2MyDrawing cv;
-
+    P2FanSurfaceView cv1;
+//P2CustomViewWithBitamp CV1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_p2_canvas_drawing);
-     cv= new P2MyDrawing(this);
 
-
-        setContentView(cv);
+        //cv= new P2MyDrawing(this);
+        cv1= new P2FanSurfaceView(this);
+        setContentView(cv1);
     }
 }
