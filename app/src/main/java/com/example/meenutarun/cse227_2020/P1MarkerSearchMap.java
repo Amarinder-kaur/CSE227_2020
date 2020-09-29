@@ -1,11 +1,14 @@
 package com.example.meenutarun.cse227_2020;
-/* To get key which we added in manifest. these are the following steps to follow:
+/* for map need this key
+To get key which we added in manifest. these are the following steps to follow:
 1. https://console.cloud.google.com
 2. Goto MyProject-->NewProject--> Give the name to project(As i given BAsicMApP1)-->Create
 3. home--> Goto API and Services--> Libraries --> Search Map SDK for Android--> Click on Enable
 4. home-->Goto API and Services --> Credentials -->Create Credentials-->API key--> key created and
 now copy this and add in manifest
 
+for places we need to add billing also
+https://developers.google.com/places/android-sdk/start
 */
 
 import android.Manifest;
@@ -46,6 +49,12 @@ import java.util.List;
 /* we are using fragment in xml which we are using to display Google Map and want to get its object.
 then we will inflate this fragement in our java
  */
+//https://developers.google.com/places/android-sdk/autocomplete
+//1. add dependeny in grade
+//2. Get an API key as we taken in map
+//3.Enable billing on your project.
+//4. Enable the Places API for your project
+// (https://console.cloud.google.com/)->home-> api and services-> library-> places api->enable
 public class P1MarkerSearchMap extends AppCompatActivity {
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient myclient;

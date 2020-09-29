@@ -41,10 +41,11 @@ public class P2FanSurfaceView extends SurfaceView implements Runnable
             @Override
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
 
-                startThread();
+                startThread1();
             }
             @Override
-            public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
+            public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2)
+            {
             }
             @Override
             public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
@@ -53,7 +54,8 @@ public class P2FanSurfaceView extends SurfaceView implements Runnable
         });
     }
 
-    public void startThread()
+
+    public void startThread1()
     {
         isRotating = true;
         t = new Thread(this);
@@ -108,7 +110,7 @@ public class P2FanSurfaceView extends SurfaceView implements Runnable
         if (r1.contains(x1, y1)) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    startThread();
+                    startThread1();
                     break;
                 case MotionEvent.ACTION_UP:
                     stopThread();
