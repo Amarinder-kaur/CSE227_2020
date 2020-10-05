@@ -15,7 +15,7 @@ import android.widget.Toast;
 import java.util.List;
 
 public class P6AllSensors extends AppCompatActivity    implements SensorEventListener {
-    TextView tvsensor,tvsensor1,tvsensor2;
+    TextView tvsensor,tvsensor1,tvsensor2,t3,t4;
 
     //variable which hold an instance of SensorManager:
     SensorManager sensorManager;
@@ -32,6 +32,8 @@ public class P6AllSensors extends AppCompatActivity    implements SensorEventLis
         tvsensor = (TextView) findViewById(R.id.tvsensor);
         tvsensor1=(TextView)findViewById(R.id.tvsensor1);
         tvsensor2=(TextView)findViewById(R.id.tvsensor2);
+        t3=(TextView)findViewById(R.id.tvsensor3);
+        t4= (TextView)findViewById(R.id.tvsensor4);
 //1. get an instance of the sensor manager from system services,
 // and assign it to the sensorManager variable:
         sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
@@ -84,7 +86,6 @@ public class P6AllSensors extends AppCompatActivity    implements SensorEventLis
 
         sensorManager.unregisterListener(this);
     }
-
     @Override
     public void onSensorChanged(SensorEvent sensorEvent)
     {
@@ -92,13 +93,21 @@ public class P6AllSensors extends AppCompatActivity    implements SensorEventLis
         switch (sensorType)
         {
             case Sensor.TYPE_LIGHT:
+                float[] value1 = sensorEvent.values;
+
+                t3.setText("Light sensor value"+value1[0]);
                 break;
             case Sensor.TYPE_PROXIMITY:
                 float[] value  = sensorEvent.values;
+                tvsensor.setText("Proximity sensor value"+value[0]);
+
                 Toast.makeText(this, "Distance is "+ value[0], Toast.LENGTH_SHORT).show();
 
                 break;
             case Sensor.TYPE_AMBIENT_TEMPERATURE:
+                float[] value2 = sensorEvent.values;
+
+                t4.setText("Temp sensor value"+value2[0]);
                 break;
             case Sensor.TYPE_ACCELEROMETER:
                 float[] values = sensorEvent.values;

@@ -30,6 +30,19 @@
         android:layout_width="match_parent"
         android:text="Show rotation matrix"
         android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/tvsensor3"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Light Sensor"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/tvsensor4"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="TempSensor"
+        android:textSize="20sp"/>
     <ScrollView
         android:layout_height="match_parent"
         android:layout_width="match_parent">
