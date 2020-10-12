@@ -3,6 +3,8 @@
     package="com.example.meenutarun.cse227_2020">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +21,9 @@
 
         </activity>
         <activity android:name=".P6AllSensors">
+
+        </activity>
+        <activity android:name=".P8Connectivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
