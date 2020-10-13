@@ -11,6 +11,17 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.meenutarun.cse227_2020.P8Connectivity">
 
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/iv"
+        android:layout_weight="1"/>
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:onClick="NetworkStatus"
+        android:text="Network Status"/>
 
 
 

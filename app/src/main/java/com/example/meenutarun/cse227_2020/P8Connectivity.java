@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -31,15 +33,17 @@ import java.util.Set;
 //<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 //to read the near by devices u need above permission
 public class P8Connectivity extends AppCompatActivity {
-
+    ConnectivityManager conn;
+    static ImageView iv;
 
     BluetoothAdapter bluetoothAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_p8_connectivity);
+        iv = (ImageView) findViewById(R.id.iv);
 
+        conn = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 //	requestPermissions(Activity activity, String[] permissions, int requestCode)
@@ -114,7 +118,7 @@ public class P8Connectivity extends AppCompatActivity {
     };
 
     public void NetworkStatus(View view) {
-/*        String imagepath = "http://placeimg.com/640/360";
+ String imagepath = "http://placeimg.com/640/360";
         String textpath = "https://www.dropbox.com/s/m83h320c153o0iw/myfile.txt?dl=1";
 
         NetworkInfo networkInfo = conn.getActiveNetworkInfo();
@@ -132,7 +136,7 @@ public class P8Connectivity extends AppCompatActivity {
                 //new MyTextTask().execute(textpath);
             }
         }
-*/    }
+  }
 
     @Override
     protected void onDestroy() {
@@ -234,3 +238,50 @@ public class P8Connectivity extends AppCompatActivity {
     }
 }
 
+
+class MyImageTask  extends AsyncTask<String, Void, Bitmap>
+        //request link,something progress bar,result
+{    @Override
+protected Bitmap doInBackground(String... strings)
+{
+    return downloadImage1(strings[0]);
+}
+    @Override
+    protected void onPostExecute(Bitmap bitmap) {
+        if(bitmap != null)
+        {
+            P8Connectivity.iv.setImageBitmap(bitmap);
+            P8Connectivity.iv.setScaleType(ImageView.ScaleType.FIT_XY);
+        }
+    }
+    Bitmap downloadImage1(String path)
+    {
+        Bitmap bitmap = null;
+        try {
+            URL url = new URL(path);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setReadTimeout(5000);
+            httpURLConnection.setConnectTimeout(5000);
+            //GET method is used to transfer data from client to server in HTTP protocol.
+            httpURLConnection.setRequestMethod("GET");
+            //setDoInput flag true if you intend to use URL connection for input.Bydefault it is true only
+            httpURLConnection.setDoInput(true);
+            httpURLConnection.connect();
+            int code = httpURLConnection.getResponseCode();
+            if(code == HttpURLConnection.HTTP_OK)
+            {
+                //Reading the data
+                InputStream stream = httpURLConnection.getInputStream();
+                if(stream != null)
+                {
+                    bitmap  = BitmapFactory.decodeStream(stream);
+                }
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+}
