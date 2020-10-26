@@ -285,3 +285,54 @@ protected Bitmap doInBackground(String... strings)
         return bitmap;
     }
 }
+
+class MyTextTask extends AsyncTask<String, Void,String>
+{
+    @Override
+    protected String doInBackground(String... strings)
+    {
+        return downLoadText(strings[0]);
+    }
+    @Override
+    protected void onPostExecute(String s) {
+        Log.d("TAG",s);
+    }
+    String downLoadText(String path)
+    {
+        String text = null;
+        try {
+            URL url = new URL(path);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setConnectTimeout(3000);
+            httpURLConnection.setReadTimeout(3000);
+            httpURLConnection.setRequestMethod("GET");
+
+            httpURLConnection.setDoInput(true);
+            httpURLConnection.connect();
+
+            int code = httpURLConnection.getResponseCode();
+            if(code == HttpURLConnection.HTTP_OK) {
+                InputStream inputStream = httpURLConnection.getInputStream();
+                if (inputStream != null) {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+                    StringBuilder sb = new StringBuilder();
+                    String line = "";
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
+
+                    text = sb.toString();
+                }
+            }
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return text;
+
+    }
+}
+
+
